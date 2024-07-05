@@ -22,6 +22,7 @@ Here Estimated cost = Lpi(i+1) + Lpi(i+1) + Lpi(i) > Lpi(i) + Lpi(i) + Lpi(i+1).
 
 Hence what we supposed turns out to be false and there is another optimal ordering. Hence we can accept the Lemma and reject the contradictory assumption.
 
+## L 1.2 : Storing Files on Tape II
 ### Problem 2: Suppose now the frequency of access is also given
 Lecture discusses sort by frequency of access and then shows an example where that will fail.
 
@@ -38,3 +39,25 @@ Optimal approach is sort ascending by length/frequency ratio.
 2. and lower frequency will lead to higher rank and higher will lead to lower rank.
 
 Lemma: Total cost pi(i) is minimized when lpi(i)/fpi(i) <= lpi(i+1)/fpi(i+1)
+
+## L 1.3 : Scheduling Class I
+
+### Problem: Schedule classes such that max classes can be attended
+
+Three approaches - 
+1. shortest Class first - As the shortest class may be in between two non-overlapping long classes and we then can only attend one  _-_
+2. Class with the fewest overlaps should be chosen - In this case, we will also pick the sub-optimal classes.
+3. Class which starts first - Wrong approach that one class may overlap all.
+
+## L 1.4 : Scheduling Class II
+### Problem : Same as above
+
+1. Pick the class that finishes the earliest and if it does not have any conflict with previous class - Optimal Solution
+   Algo -
+   Sort classes by finish time and pick the first class.
+   Pick the second class if its start time is after or same as the finish time of previous class.
+
+Lemma: At least one optimal conflict-free collection of classes includes the one that finishes first.
+
+## L 1.5 : 
+### Problem : Same as above
