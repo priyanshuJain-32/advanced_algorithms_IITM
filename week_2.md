@@ -143,6 +143,52 @@ Problem: U is a universe of elements e1 ... en
 Each element has a weight wt: U -> Q>=0. Weight function from Universe to weights >= 0.
 Family of set of universes F = {S1, S2, ..... Sm}; Si c= U. Where Si is a subset of U
 
-weight of each set is Sum of weights of each element in the set
+weight of each set is the Sum of the weights of each element in the set
 
 Goal: Find max weight set in F.
+Input: (U,F), wt: U-> Q>=0, oracle access to F. 
+Output: max wt set in F.
+
+Sort the elements of U in decreasing order of wt.
+
+X -> phi
+
+for i in 1->n:
+  if (XUei belong to F):
+    X <- X U {ei}
+return X
+
+We saw that our algo will not work on non-matroid structure. Like last time. But this time we will apply it on matroid family.
+
+Assume:
+Output of Greedy: f1, f2, f3 ... fk
+Optimal Output : g1, g2 .... gk
+
+Let k be size of greedy output <= rank of matroid. It cannot be more than the rank.
+
+Size of Optimal output will be k as if it was less than that set would be subset of some other maximal set and optimal solution can always be improved.
+Hence Optimal Output = k.
+
+let's say greedy output some solution which had less than k elements. Now we can see that at some point there was an element which is part of a maximal set and must have been picked by greedy and when Oracle access was initiated it must have returned true and hence greedy will not ignore that element and in the end will end up with a maximal set of size k. This is by heredity.
+
+Proof is by contradiction: see the video for clarity.
+
+## L2. 4: Greedy Fails on non-Matroid Structures
+
+Let Subset system is a finite collection of sets that satisfy heredity.
+
+X belongs to F, Y subset X then Y belongs to F
+
+Claim: for any subset system (U,F) that is not a matroid, then there is a wt. function such that the greedy algorithm does not return an optimal solution
+
+
+
+
+
+
+
+
+
+
+
+
