@@ -22,3 +22,127 @@ Family is generally not given but just specified. Universe is given.
 Or a subset will be given and we have to tell whether it belongs to a family or not.
 
 It's called "Oracle Access" is given to a set and we tell whether that set belongs a particular family.
+
+A Greedy Approach: Consider we have a blackbox i.e. our algo which will tell us whether an S is a part of F or not.
+
+Algo:
+Sort the elements in decreasing order of weights. 
+Initialize solution set = empty
+While there are elements:
+  If (X U curr belongs to F): # This is our black box check
+    Add X to curr
+  Move to next element
+
+Example U = {W,X,Y,Z}
+
+wt(W) = 50, wt(X) = 30, wt(Y) = 42, wt(Z) = 10
+
+Let F = { {W}, {X,Y}, {Y,Z}, {Z} }
+Weights will be 50, **72**, 52, 10 for the F members
+
+For W Y X Z out algo should return 72. But it does not.
+
+We check whether W is in F, yes so we add it to X.
+WY is not in F so we move forward.
+WX is not in F so we move forward.
+WZ is not in F so we move forward.
+
+This missed out on the other sets. Hence greedy did not work here.
+
+Kruskal's algorithm will work here.
+
+Let's forcefully prove that our greedy algo works.
+
+Let Output of greedy = f1, f2, .... fk
+Let weights then be = w1 >= w2 >= w3 ...
+
+Optimal solution is g1, g2, g3 ...
+Optimal weights are wg1 >= wg2 >= ...
+
+Let f1 ... fp and g1 ... gp upto fp greedy and optimal did the same.
+Let fp+1 < gp+1 i.e. it did not work similar to optimal. Why did this happen? It is because greedy ran out of elements as it was stuck with W.
+
+We can see that the definition of Matroid will help us get out of this situation.
+
+We will define what is a matroid and then show that if the family is a matroid then our greedy algo with work.
+
+## L2. 2: Definition and Examples
+
+(U,F) where U consists of elements and F is a set of subset of U
+Properties of Matroid: (read carefully)
+
+1. Non-emptiness - Empty set is always part of the Family.
+2. Heridity - If X belongs to F and Y belongs to X then Y belongs to F.
+3. Exchange Property - X, Y belong to F and size of X > size of Y then x = X-Y is not empty. and Y union x is also part of F.
+
+Let F = { {W}, {X,Y}, {Y,Z}, {Z} }
+Our example above violates all the three properties:
+1. Violates Non-emptiness - It does not have empty set
+2. Violates Heridity - X,Y belong to F and Y belong to X,Y but Y does not belong F and X does not belong to F.
+3. Violates Exchange Property - {X,Y}-{Y,Z} = {X} {Y,Z} union {X} is not in F.
+
+### Uniform matroid (k)
+n = 10
+U = {1,2,3...n}
+F = {X | X subset U, |X|<=k}, k = 2
+F = {phi, {1}, {2}, ... {12}, {13}, ... {9 10}}
+
+1. Non-emptiness is followed
+2. Heridity is followed
+3. Exchange property also works
+
+### Linear Matroid
+Suppose A-> n X m matrix
+U = {1,2....n}
+F = {X subset U | the columns corresponding to X are linearly independent in A}
+
+1. Non-emptiness - An empty set is always part of the Family. As it also linearly independent.
+2. Heridity - If X belongs to F and Y belongs to X then Y belongs to F. As in this case, each vector is also linearly independent.
+3. Exchange Property - X, Y belongs to F, and size of X > size of Y then x = X-Y is not empty. and Y union x is also part of F.
+
+### Graphic Matroid
+Suppose G = (V,E)
+U = E
+F = { X subset E | G[X] is acyclic }
+
+1. Non-emptiness - An empty set is always part of the Family. As it is also acyclic.
+2. Heridity - If X belongs to F and Y belongs to X then Y belongs to F. As every single edge will also be acyclic.
+3. Exchange Property - X, Y belongs to F, and size of X > size of Y then x = X-Y is not empty. and Y union x is also part of F. Here if we remove some edges of Y from X and then take one of those remaining edges in X and add it to Y then also YUx will be acyclic. Detailed proof in video.
+
+### Another example of Non-matroid
+G = (V,E)
+U = E
+F = {X | X subset E such that X is a matching }
+
+Self exercise
+
+## L2. 3: Greedy Works!
+
+Members of Family F are called independent Sets.
+A maximal elements of F is called basis. That means no other set can contain that set.
+
+All basis have the same size.
+Claim If X, Y belong to F. If X & Y are basis elements i.e. they are maximal in F. Then size X == Size Y.
+
+For sake of contradiction lets say X != Y.
+
+Then by exchange property X-Y = x and YUx should belong to F. This is a contradiction as Y was supposed to be maximal but we found YUx which is greater than Y.
+Hence X and Y must be same size.
+
+All basis elements have same size and this size is called Rank of the Matroid.
+
+Basis of a Maximal independent set is nothing but a Maximal Spanning Tree.
+
+If a set is in the family then it is called independent set and if you are out then it is called dependent set.
+
+Summary Rank and Independent are import takeaways here/
+
+### Back to problem from L2.1
+
+Problem: U is a universe of elements e1 ... en
+Each element has a weight wt: U -> Q>=0. Weight function from Universe to weights >= 0.
+Family of set of universes F = {S1, S2, ..... Sm}; Si c= U. Where Si is a subset of U
+
+weight of each set is Sum of weights of each element in the set
+
+Goal: Find max weight set in F.
