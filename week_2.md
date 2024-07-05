@@ -181,6 +181,25 @@ X belongs to F, Y subset X then Y belongs to F
 
 Claim: for any subset system (U,F) that is not a matroid, then there is a wt. function such that the greedy algorithm does not return an optimal solution
 
+Assume F is not a matroid and fails on exchange property.
+
+For all X, Y belongs to F. If size X > size Y, then there exists x belongs to X\Y such that Y union x belongs to F.
+
+**Negation of this:**
+X,Y belongs to F such that size X > size Y but for all x belonging to X\Y, YUx does not belong to F.
+
+## Why greedy failed in Non-overlapping classes case?
+Let's say the algo was to pick the non-overlapping classes.
+Take this example _-_
+Consider the single class as Y and two classes as X. Here if we see size X > size Y but X-Y = x will have the two classes of X. and if we were to add any of the two classes to Y it will not be part of F. As F is a family of non-overlapping classes.
+
+But we will say that some other greedy algo worked where we sorted the classes in decreasing order by end times. It was a special case.
+
+If we were to add weights to the classes and if we say I want to pick non-overlapping classes and maximize weight then greedy algo may end up failing.
+So in non-matroids, greedy algos could work but in special cases and special algos.
+
+## L2. 5: Scheduling with Deadlines
+
 
 
 
