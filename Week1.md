@@ -59,5 +59,47 @@ Three approaches -
 
 Lemma: At least one optimal conflict-free collection of classes includes the one that finishes first.
 
-## L 1.5 : 
+## L 1.5 : Stable Mathchings I
+### Problem : Two groups of agents want to get matched. Each agent has a rank of the match options that are available.
+Unstable pair or blocking pair: When a pair of agents from side A and side B both prefer each other over the currently assigned partners.
+
+Goal: Find a matching that minimized the number of blocking pairs. It is also called Stable Matching.
+
+Some approaches - 
+1. Match A1-B1  and A2-B2 and A3-B3. Then just keep resolving blocking pairs. Problem is that this can become never ending.
+
+## L 1.6 : Stable Mathchings II
 ### Problem : Same as above
+
+1. Another greedy approach (that works)
+   Men propose in rank order and women engage with the best offer.
+
+   If M1 proposed W1 and W1 accepts it then M1 and W1 get engaged.
+   But in this case some women will not engaged in the first round of proposals. and some men will not get their first preference.
+
+   Then we consider in the next round the second options.
+
+   Women who get a second offer and the current offer ranks lower they will switch to this new offer. That will make the men who they were matched with before vacant.
+   In case women do not choose the new proposal then there will be a blocking pair at the end.
+
+   Example:
+   q : C > B > A
+   r : A > C > B
+   s : A > B > C
+
+   A : q > s > r
+   B : q > r > s
+   C : s > r > q
+
+   R1 start = q - C; r - A; s - A
+   R1 end = q - C; r - X; s - A
+
+   R2 start = q - C; r - C; s - A
+   R2 end = q - X; r - C; s - A
+
+   R3 start = q - B; r - C; s - A
+   R3 end = q - B; r - C; s - A
+
+## L 1.7 : Stable Mathchings III
+### Proof: Correctness of Algorithm
+
