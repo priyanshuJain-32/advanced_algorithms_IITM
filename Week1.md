@@ -1,4 +1,4 @@
-# advanced_algorithms_IITM
+# Advanced_algorithms_IITM
 Notes from Advanced Algorithms Classes at IITM
 
 # Week 1
