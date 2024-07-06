@@ -200,11 +200,47 @@ So in non-matroids, greedy algos could work but in special cases and special alg
 
 ## L2. 5: Scheduling with Deadlines
 
+n tasks n days
+
+Each task has a deadline and there is penalty to finishing task after deadline.
+
+Let's say D[ i ] is array - day by which ith task should be completed to avoid a penalty.
+p[i] is array of penalty for ith task.
+
+We need to return a schedule.
+
+Cost of a schedule - Total penalty that we pay if we delay the deadline. = Cost(pi) = summation P[i] * ( pi(i) > D[i] ). This is kind of indicator variable. Binary in nature. if condition is true its 1. That means task got delayed.
+
+task = A B C D
+D = 2 1 1 4
+p = 10 20 30 40
+
+Let's say we did A,B,C,D cost = 20+30. We finished A and D before deadline
+
+Another approach
+C, A, B, D. 
+Day 1 - As C has higher penalty among A and B so we should do it earlier.
+Day 2 - As B already has incurred penalty we must do A to avoid its penalty.
+Days 3 - We can pick B or D as D does not penalty today.
+Day 4 - Pick the last task.
+Cost = 20
+
+Now we will see how matroids apply here. Family here is subset of permutations.
+
+We have two types of task - Late, Ontime.
+
+Cost of a schedule is determined by the subset of tasks that are completed on time.
+
+X subset {1,2,...n} realistic if there is a schedule where all tasks in X are on time.
+
+A B C D 
+2 1 1 4
+
+We can look at this problem of task scheduling to minimize penalty from the POV that if we want to reduce the penalty we can maximize the penalty of tasks that can scheduled realistically i.e. without incurring any penalty. Then penalty will be total penalty - penalty of X. maximize X will minimize penalty.
 
 
 
-
-
+ 
 
 
 
